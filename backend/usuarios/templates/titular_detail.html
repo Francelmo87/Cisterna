@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{object.nome}}
+    <span class="pull-right">
+      <a href="{% url 'usuarios:titular_list' %}">
+        <button type="button" class="btn btn-warning">
+            <span class="fa fa-undo"></span> Voltar
+        </button>
+      </a>
+      <a href="{ url 'produto:produto_edit' object.pk %}">
+        <button type="button" class="btn btn-success">
+          <span class="fa fa-pencil"></span> Editar
+        </button>
+      </a>
+    </span>
+</h1>
+
+<div class="col-sm-6">
+    <table class="table table-user-information">
+      <tbody>
+        <tr>
+          <th class="text-right">Situação: </th>
+          <td>
+              {% if object.active}
+                <i class="fa fa-check-circle ok"></i>
+              {% else %}
+                <i class="fa fa-minus-circle no"></i>
+              {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <th class="text-right">Inserido em: </th>
+          <td>{{ object.inicio }}</td>
+        </tr>
+        <tr>
+          <th class="text-right">Validade:</th>
+          <td>{{ object.fim }} </td>
+        </tr>
+        <tr>
+          <th class="text-right">Rg:</th>
+          <td>{{ object.rg }}</td>
+        </tr>
+        <tr>
+          <th class="text-right">CPF:</th>
+          <td>{{ object.cpf }}</td>
+        </tr>
+        <tr>
+          <th class="text-right">NIS:</th>
+          <td>{{ object.nis }}</td>
+        </tr>
+        <tr>
+          <th class="text-right">Telefone:</th>
+          <td>{{ object.telefone }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-3">
+      <form action="." method="GET" class="d-flex">
+        <input type="text" id="search" name="search" class="form-control me-2" placeholder="Busca">
+        <input type="submit" class="btn btn-primary" style="margin-left: 10px;" value="OK">
+      </form>
+    </div>
+</div>
+
+<div class="page-header">
+    <h2>Lista de Usuários
+        <span class="pull-right">
+            <a href="{ url 'usuarios:usuario_add' %}">
+                <button type="button" class="btn btn-primary">
+                    <span class="fa fa-plus "></span>Adicionar
+                </button>
+            </a>
+        </span>
+    </h2>
+    {% if titular_list %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text_center">Ativo</th>
+                <th class="text_center">Nome</th>
+                <th class="text_center">RG</th>
+                <th class="text_center">CPF</th>
+                <th class="text_center">NIS</th>
+                <th class="text_center">Telefone</th>
+                <th class="text_center">Membros</th>
+                <th class="text_center">Endereço</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for titular in titular_list %}
+            <tr>
+                 <td>
+                    {% if titular.active %}
+                      {{titular.id}}
+                        <i class="fa fa-check-circle ok"></i>
+                    {% else %}
+                        <i class="fa fa-minus-circle no"></i>
+                    {% endif %}
+                </td>
+                <td>
+                     <a href="{% url 'usuarios:titular_detail' titular.pk %}">{{titular.nome}}</a>
+                </td>
+
+                <td>{{titular.rg}}</td>
+                <td>{{titular.cpf}}</td>
+                <td>{{titular.nis}}</td>
+                <td>{{titular.telefone}}</td>
+                <td class="text-center">
+                    <a href="{% url 'usuarios:membro_list' titular.pk %}"><i class="fa fa-users"></i></a>
+                </td>
+                <td class="text-center">
+                    <a href="{% url 'usuarios:endereco_titular' titular.pk %}"><i class="fa fa-list"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="alert alert_warning">Sem itens na lista</p>
+    {% endif %}
+</div>
+
+    {% include "includes/pagination.html" %}
+
+{% endblock content %}
