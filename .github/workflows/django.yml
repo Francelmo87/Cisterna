@@ -12,18 +12,16 @@ jobs:
     runs-on:  ubuntu-latest
   # Passos
   steps:
-<<<<<<< HEAD
     - uses: actions/checkout@v4
-=======
-    - uses: actions/checkout@v2
->>>>>>> origin/master
     - name: Set up Python 3.11
       uses: actions/setup-python@v1
       with:
         python-version: 3.11
+    # instalar a diretivas
     - name: Instalar Dependências
       run: |
-        pip install sync --dev
+        pip install pipenv
+        pipenv sync --dev
     - name: Rodar Testes Automáticos
       run: |
-        pip run pytest backend
+        pipenv run pytest backend
