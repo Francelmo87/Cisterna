@@ -1,0 +1,25 @@
+name: Aplicação Django
+# Quando vai rodar
+   # pull_request
+on: [push]
+# Definir os passos
+jobs:
+  # construtor
+  build:
+    env:
+      PIP_NO_INHERIT:
+      PIP_IGNORE_VIRTUALENVS:
+    runs-on:  ubuntu-latest
+  # Passos
+  steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.11
+    - name: Instalar Dependências
+      run: |
+        pip install sync --dev
+    - name: Rodar Testes Automáticos
+      run: |
+        pip run pytest backend
