@@ -12,7 +12,11 @@ jobs:
     runs-on:  ubuntu-latest
   # Passos
   steps:
+<<<<<<< HEAD
     - uses: actions/checkout@v4
+=======
+    - uses: actions/checkout@v2
+>>>>>>> origin/master
     - name: Set up Python 3.11
       uses: actions/setup-python@v1
       with:
