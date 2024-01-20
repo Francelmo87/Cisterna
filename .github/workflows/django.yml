@@ -11,17 +11,15 @@ jobs:
       PIP_IGNORE_VIRTUALENVS:
     runs-on:  ubuntu-latest
   # Passos
-  steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.11
-    # instalar a diretivas
-    - name: Instalar Dependências
-      run: |
-        pip install pipenv
-        pipenv sync --dev
-    - name: Rodar Testes Automáticos
-      run: |
-        pipenv run pytest backend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.11
+      - name: Instalar Dependências
+        run: |
+          pip install sync --dev
+      - name: Rodar Testes Automáticos
+        run: |
+          pip run pytest backend
