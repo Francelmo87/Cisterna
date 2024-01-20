@@ -19,4 +19,4 @@ jobs:
           python-version: 3.11
       - name: Rodar Testes Automáticos
         run: |
-          pip run pytest backend
+          pytest backend
