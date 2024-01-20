@@ -17,10 +17,6 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.11
-      - name: Instalar Dependências
-        run: |
-          pip install pipenv
-          pipenv sync --dev
       - name: Rodar Testes Automáticos
         run: |
-          pipenv run pytest backend
+          pip run pytest backend
