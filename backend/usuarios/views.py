@@ -1,8 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from datetime import date, timedelta
-
+from datetime import datetime
 from .models import Titular, Membro, Endereco
 
 
@@ -29,16 +28,12 @@ def titular_list(request):
     search = request.GET.get('search')
     if search:
         titular = titular.filter(nome__icontains=search)
-    now = date.today()
-    # year = timedelta(days=365)
-    # validade = titular.values("inicio").annonnate(sum(year))
-
+    # Faz a função de ativação do usuario pelo tempo
+    tempo_ativo = titular.filter(fim__gte=datetime.now())
     context = {
         'titular_list': titular,
-        'now': now
-        # 'tempo_ativo': validade
+        'tempo_ativo': tempo_ativo
        }
-    print(context)
     return render(request, template_name, context)
 
 
@@ -48,17 +43,6 @@ def titular_detail(request, pk):
     obj = Titular.objects.get(pk=pk)
     context = {'object': obj}
     return render(request, template_name, context)
-
-
-def tempo_ativo(request):
-    year = timedelta(days=365)
-    validade = date.today() + year
-    context = {'tempo_ativo': validade}
-    return render(request, context)
-
-
-
-
 
 
 
