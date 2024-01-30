@@ -1,8 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Sum
 from django.shortcuts import render
 from datetime import datetime
-from .models import Titular, Membro, Endereco
+from .models import Titular, Membro, Endereco, Cisterna
+from datetime import timedelta
+
+from ..settings import CONSUMO_PESSOA
 
 
 @login_required
@@ -25,26 +29,50 @@ def endereco_titular(request, pk):
 def titular_list(request):
     template_name = 'titular_list.html'
     titular = Titular.objects.all()
+    # CAMPO DE BUSCA
     search = request.GET.get('search')
     if search:
         titular = titular.filter(nome__icontains=search)
-    # Faz a função de ativação do usuario pelo tempo
-    tempo_ativo = titular.filter(fim__gte=datetime.now())
+    # Retorna quanto tempo ele ficara ativado - usuario pelo tempo
+    tempo_ativo = titular.filter(dt_validade__gte=datetime.now())
+    # Paginação
+    paginator = Paginator(titular, 10)
+    page_number = request.GET.get('page')
+    titular = paginator.get_page(page_number)
+
     context = {
         'titular_list': titular,
         'tempo_ativo': tempo_ativo
-       }
+    }
     return render(request, template_name, context)
 
 
 @login_required
 def titular_detail(request, pk):
+    global dias_consumo, dt_pedido
     template_name = 'titular_detail.html'
     obj = Titular.objects.get(pk=pk)
-    context = {'object': obj}
+    cisterna = Cisterna.objects.get(titular__pk=pk)
+
+    qtd_pessoas = Membro.objects.filter(titular__pk=pk, nome__isnull=False).count() + 1
+    volume = Cisterna.objects.filter(titular__pk=pk).annotate(volume_total=Sum('volume'))
+    for vol in volume:
+        dias_consumo = vol.volume_total // (qtd_pessoas * CONSUMO_PESSOA)
+
+    lista = Titular.objects.filter(pk=pk)
+    for dt in lista:
+        dt_pedido = dt.dt_pedido
+    tempo_uso = timedelta(dias_consumo)
+    if dt_pedido is not None:
+        dt_retorno = dt_pedido + tempo_uso
+    else:
+        dt_retorno = dt_pedido
+    context = {
+        'object': obj,
+        'cisterna': cisterna,
+        'dt_retorno': dt_retorno,
+    }
     return render(request, template_name, context)
-
-
 
 #
 #
@@ -97,8 +125,4 @@ def titular_detail(request, pk):
 #     pet = Pet.objects.filter(active=True, user=request.user)
 #     return render(request, 'list.html', {'pet':pet})
 
-
-# Paginação
-    # paginator = Paginator(objects, 10)
-    # page_number = request.GET.get('page')
-    # objects = paginator.get_page(page_number)
+#
