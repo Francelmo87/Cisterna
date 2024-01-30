@@ -9,11 +9,6 @@
             <span class="fa fa-undo"></span> Voltar
         </button>
       </a>
-      <a href="{ url 'produto:produto_edit' object.pk %}">
-        <button type="button" class="btn btn-success">
-          <span class="fa fa-pencil"></span> Editar
-        </button>
-      </a>
     </span>
 </h1>
 
@@ -21,38 +16,28 @@
     <table class="table table-user-information">
       <tbody>
         <tr>
-          <th class="text-right">Situação: </th>
-          <td>
-               {% if tempo_ativo  %}
-                <i class="fa fa-check-circle ok"></i>
-              {% else %}
-                <i class="fa fa-minus-circle no"></i>
-              {% endif %}
-          </td>
+          <th class="text-right">Validade: </th>
+          <td>{{ object.dt_validade }}</td>
         </tr>
         <tr>
-          <th class="text-right">Inserido em: </th>
-          <td>{{ object.inicio }}</td>
-        </tr>
-        <tr>
-          <th class="text-right">Validade:</th>
-          <td>{{ object.fim }} </td>
-        </tr>
-        <tr>
-          <th class="text-right">Rg:</th>
-          <td>{{ object.rg }}</td>
+          <th class="text-right">Data do pedido:</th>
+          <td>{{ object.dt_pedido }} </td>
         </tr>
         <tr>
           <th class="text-right">CPF:</th>
           <td>{{ object.cpf }}</td>
         </tr>
         <tr>
-          <th class="text-right">NIS:</th>
-          <td>{{ object.nis }}</td>
+          <th class="text-right">Próxima viagem:</th>
+          <td>{{ dt_retorno }}</td>
         </tr>
         <tr>
-          <th class="text-right">Telefone:</th>
-          <td>{{ object.telefone }}</td>
+          <th class="text-right">Id da cisterna:</th>
+          <td>{{ cisterna.codigo }}</td>
+        </tr>
+        <tr>
+          <th class="text-right">Volume:</th>
+          <td>{{ cisterna.volume }}</td>
         </tr>
       </tbody>
     </table>
