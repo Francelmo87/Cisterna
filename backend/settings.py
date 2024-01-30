@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     # my apps
     'backend.base',
-    'backend.cisterna',
     'backend.usuarios',
 ]
 
@@ -121,5 +120,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
+CONSUMO_PESSOA = 30
