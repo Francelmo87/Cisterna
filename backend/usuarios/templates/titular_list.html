@@ -27,10 +27,11 @@
             <tr>
                 <th class="text_center">Ativo</th>
                 <th class="text_center">Nome</th>
-                <th class="text_center">RG</th>
                 <th class="text_center">CPF</th>
+                <th class="text_center">RG</th>
                 <th class="text_center">NIS</th>
                 <th class="text_center">Telefone</th>
+                <th class="text_center">Pedido</th>
                 <th class="text_center">Membros</th>
                 <th class="text_center">Endereço</th>
             </tr>
@@ -50,10 +51,11 @@
                      <a href="{% url 'usuarios:titular_detail' titular.pk %}">{{titular.nome}}</a>
                 </td>
 
-                <td>{{titular.rg}}</td>
                 <td>{{titular.cpf}}</td>
+                <td>{{titular.rg}}</td>
                 <td>{{titular.nis}}</td>
                 <td>{{titular.telefone}}</td>
+                <td>{{titular.dt_pedido}}</td>
                 <td class="text-center">
                     <a href="{% url 'usuarios:membro_list' titular.pk %}"><i class="fa fa-users"></i></a>
                 </td>
