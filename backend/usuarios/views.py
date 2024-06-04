@@ -1,12 +1,18 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Sum
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from datetime import datetime
+
+from django.urls import reverse
+
 from .models import Titular, Membro, Endereco, Cisterna
 from datetime import timedelta
 
 from ..settings import CONSUMO_PESSOA
+
+from .form import UsuarioForm
 
 
 @login_required
@@ -27,7 +33,7 @@ def endereco_titular(request, pk):
 
 @login_required
 def titular_list(request):
-    template_name = 'titular_list.html'
+    template_name = 'titular/titular_list.html'
     titular = Titular.objects.all()
     # CAMPO DE BUSCA
     search = request.GET.get('search')
@@ -50,7 +56,7 @@ def titular_list(request):
 @login_required
 def titular_detail(request, pk):
     global dias_consumo, dt_pedido
-    template_name = 'titular_detail.html'
+    template_name = 'titular/titular_detail.html'
     obj = Titular.objects.get(pk=pk)
     cisterna = Cisterna.objects.get(titular__pk=pk)
 
@@ -74,20 +80,21 @@ def titular_detail(request, pk):
     }
     return render(request, template_name, context)
 
-#
-#
-# @login_required
-# def produto_add(request):
-#     form = ProdutoForm(request.POST or None)
-#     template_name = 'produto_form.html'
-#     if request.method == 'POST':
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse('produto:produto_list'))
-#     context = {'form': form}
-#     return render(request, template_name, context)
-#
-# #
+
+@login_required
+def titular_add(request):
+    form = UsuarioForm(request.POST or None)
+    template_name = 'titular/titular_add.html'
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('usuario:titular_list'))
+
+    context = {'form': form}
+    return render(request, template_name, context)
+
+
 # @login_required
 # def produto_update(request, pk):
 #     template_name = 'produto_update.html'

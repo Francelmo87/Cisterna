@@ -1,8 +1,5 @@
 from django.db import models
-
 from django.contrib.auth.models import User
-from django.urls import reverse_lazy
-
 from backend.base.models import TimeStampedModel
 
 
@@ -12,7 +9,6 @@ class Titular(TimeStampedModel):
     dt_pedido = models.DateField('Data do Pedido', null=True, blank=True)
     dt_entrega = models.DateField('Data da Entrega', null=True, blank=True)
     nome = models.CharField('Nome', max_length=70, blank=True)
-
     rg = models.PositiveIntegerField('RG', null=True, blank=True)
     cpf = models.PositiveIntegerField('CPF', null=True, blank=True)
     nis = models.PositiveIntegerField('NIS', null=True, blank=True)
