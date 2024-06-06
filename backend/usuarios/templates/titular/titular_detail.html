@@ -5,8 +5,13 @@
 <h1>{{object.nome}}
     <span class="pull-right">
       <a href="{% url 'usuarios:titular_list' %}">
-        <button type="button" class="btn btn-warning">
+        <button type="button" class="btn btn-info">
             <span class="fa fa-undo"></span> Voltar
+        </button>
+      </a>
+      <a href="{% url 'usuarios:titular_edit' object.pk %}">
+        <button type="button" class="btn btn-warning">
+            <span class="fa fa-pencil "></span> Editar
         </button>
       </a>
     </span>
