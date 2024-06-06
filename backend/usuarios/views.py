@@ -95,19 +95,19 @@ def titular_add(request):
     return render(request, template_name, context)
 
 
-# @login_required
-# def produto_update(request, pk):
-#     template_name = 'produto_update.html'
-#     obj = Produto.objects.get(pk=pk)
-#     form = ProdutoForm(request.POST or None, instance=obj)
-#     if request.method == 'POST':
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse('produto:produto_list'))
-#     context = {'form': form}
-#     return render(request, template_name, context)
-#
-#
+@login_required
+def titular_edit(request, pk):
+    template_name = 'titular/titular_edit.html'
+    obj = Titular.objects.get(pk=pk)
+    form = UsuarioForm(request.POST or None, instance=obj)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('usuarios:titular_list'))
+    context = {'form': form}
+    return render(request, template_name, context)
+
+
 # @login_required
 # def produto_delete(request, pk):
 #     obj = Produto.objects.get(pk=pk)
