@@ -62,6 +62,13 @@
                 <td class="text-center">
                     <a href="{% url 'usuarios:endereco_titular' titular.pk %}"><i class="fa fa-list"></i></a>
                 </td>
+                <td>
+                    <a href="{% url 'usuarios:titular_delete' titular.pk %}"
+                       class="btn btn-danger btn-sm" title="Excluir"
+                       onclick="return confirm('Tem certeza que deseja exluir?')">
+                       <i class="fa fa-trash" ></i>
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

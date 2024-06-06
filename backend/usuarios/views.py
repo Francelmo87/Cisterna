@@ -108,12 +108,12 @@ def titular_edit(request, pk):
     return render(request, template_name, context)
 
 
-# @login_required
-# def produto_delete(request, pk):
-#     obj = Produto.objects.get(pk=pk)
-#     obj.delete()
-#     return HttpResponseRedirect(reverse('produto:produto_list'))
-#
+@login_required
+def titular_delete(request, pk):
+    obj = Titular.objects.get(pk=pk)
+    obj.delete()
+    return HttpResponseRedirect(reverse('usuarios:titular_list'))
+
 #
 # def produto_json(request, pk):
 #     # Retorna o produto, id e estoque.
