@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     # my apps
     'backend.base',
     'backend.usuarios',
+    'backend.pedido'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
