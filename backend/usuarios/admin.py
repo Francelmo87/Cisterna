@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from .models import Titular, Endereco, Membro, Cisterna
+from .models import Titular, Endereco, Dependente
 
 
-class MembroInline(admin.TabularInline):
-    model = Membro
+class DependenteInline(admin.TabularInline):
+    model = Dependente
     extra = 0
 
 
@@ -13,13 +13,8 @@ class EnderecoInline(admin.TabularInline):
     extra = 0
 
 
-class CisternaInline(admin.TabularInline):
-    model = Cisterna
-    extra = 0
-
-
 @admin.register(Titular)
 class UsuarioAdmin(admin.ModelAdmin):
-    inlines = (MembroInline, EnderecoInline, CisternaInline)
-    list_display = ('nome', 'rg', 'cpf', 'nis', 'telefone', 'active',)
+    inlines = (DependenteInline, EnderecoInline,)
+    list_display = ('nome', 'rg', 'cpf', 'nis', 'telefone', 'ativo',)
 

@@ -14,8 +14,8 @@ titular_patterns = [
 ]
 
 
-membro_patterns = [
-   path('<int:pk>/', v.membro_list, name='membro_list'),
+dependente_patterns = [
+   path('<int:pk>/', v.dependente_list, name='dependente_list'),
 ]
 
 
@@ -26,6 +26,6 @@ endereco_patterns = [
 
 urlpatterns = [
    path('titular/', include(titular_patterns)),
-   path('membro/', include(membro_patterns)),
+   path('membro/', include(dependente_patterns)),
    path('endereco/', include(endereco_patterns)),
 ]

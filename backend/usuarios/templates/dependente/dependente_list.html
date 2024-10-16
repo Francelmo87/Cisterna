@@ -12,7 +12,7 @@
             </a>
         </span>
     </h2>
-    {% if membro_list %}
+    {% if dependente_list %}
     <table class="table table-striped">
         <thead>
             <tr>
@@ -26,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for membro in membro_list %}
+            {% for membro in dependente_list %}
             <tr>
                 <td>{{membro.titular.nome}}</td>
                 <td>{{membro.nome}}</td>
