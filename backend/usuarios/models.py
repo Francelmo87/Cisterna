@@ -48,7 +48,7 @@ class Endereco(models.Model):
     distrito = models.CharField('Distrito', max_length=20, blank=True)
     localidade = models.CharField('Localidade', max_length=20, blank=True)
     geolocalizacao = models.IntegerField('Geolocalização', blank=True)
-    titular = models.ForeignKey(
+    titular = models.OneToOneField(
         Titular,
         on_delete=models.SET_NULL,
         null=True, blank=True
