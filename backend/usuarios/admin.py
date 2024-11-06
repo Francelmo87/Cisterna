@@ -17,4 +17,3 @@ class EnderecoInline(admin.TabularInline):
 class UsuarioAdmin(admin.ModelAdmin):
     inlines = (DependenteInline, EnderecoInline,)
     list_display = ('nome', 'rg', 'cpf', 'nis', 'telefone', 'ativo',)
-
