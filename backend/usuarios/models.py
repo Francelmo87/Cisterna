@@ -47,7 +47,7 @@ class Dependente(models.Model):
 class Endereco(models.Model):
     distrito = models.CharField('Distrito', max_length=20, blank=True)
     localidade = models.CharField('Localidade', max_length=20, blank=True)
-    geolocalizacao = models.IntegerField('Geolocalização', blank=True)
+    referencia = models.CharField('Ponto de referência', max_length=200, blank=True)
     titular = models.OneToOneField(
         Titular,
         on_delete=models.SET_NULL,
