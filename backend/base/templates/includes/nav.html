@@ -17,16 +17,16 @@
                 <a class="nav-link text-white" href="{% url 'usuarios:titular_list' %}">Usuários</a>
             </li>
 
-<!--            <li class="nav-item dropdown">-->
-<!--                <a class="nav-link dropdown-toggle text-white" href="#" role="button"-->
-<!--                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Solicitação</span>-->
-<!--&lt;!&ndash;                   <i class="fa fa-arrow-right" aria-hidden="true"></i>&ndash;&gt;-->
-<!--                </a>-->
-<!--                <ul class="dropdown-menu" >-->
-<!--                    <li><a class="dropdown-item" href="{ url 'estoque:estoque_entrada_list' %}">Entrada</a></li>-->
-<!--                    <li><a class="dropdown-item" href="{ url 'estoque:estoque_saida_list' %}">Saída</a></li>-->
-<!--                </ul>-->
-<!--            </li>-->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Solicitação</span>
+                </a>
+                <ul class="dropdown-menu" >
+                    <li><a class="dropdown-item" href="{% url 'pedido:pedido_list_all' %}">Todos</a></li>
+                    <li><a class="dropdown-item" href="{% url 'pedido:pedido_visitar_list' %}">A visitar</a></li>
+                    <li><a class="dropdown-item" href="{% url 'pedido:pedido_abastecer_list' %}">A abastecer</a></li>
+                </ul>
+            </li>
 
         </ul>
 
