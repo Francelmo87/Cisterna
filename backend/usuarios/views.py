@@ -1,12 +1,15 @@
+from datetime import date
+
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
 from django.urls import reverse
 from .models import Titular, Dependente, Endereco
 
 from .form import UsuarioForm
+from .verificacao import verificar_titulares
 
 
 @login_required
@@ -21,6 +24,8 @@ def titular_list(request):
     paginator = Paginator(titular, 10)
     page_number = request.GET.get('page')
     titular = paginator.get_page(page_number)
+    # Verificação se titular continua ativo
+    verificar_titulares()
     context = {
         'titular_list': titular
     }
@@ -44,7 +49,7 @@ def titular_add(request):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('usuario:titular_list'))
+            return HttpResponseRedirect(reverse('usuarios:titular_list'))
     context = {
         'form': form
     }
