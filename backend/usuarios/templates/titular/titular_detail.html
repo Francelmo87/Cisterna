@@ -39,32 +39,50 @@
           <td>{{ object.cpf }}</td>
         </tr>
       </tbody>
-    {% if membro_list %}
+    </table>
+</div>
+{% if object.ativo %}
+<div class="col-sm-12">
+    <span class="pull-right">
+      <a href="{% url 'pedido:pedido_add'%}">
+        <button type="button" class="btn btn-success">
+            <span class="fa fa-undo"></span> Solicitar
+        </button>
+      </a>
+    </span>
+</div>
+{% endif %}
+      <br>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Dependente</th>
-                <th>CPF</th>
-                <th>Parentesco</th>
-                <th>Idade</th>
-                <th>Ocupação</th>
-                <th>Renda</th>
+                <th class="text_center">Entregue em</th>
+                <th class="text_center">Cod_Cisterna</th>
+                <th class="text_center">Volume</th>
+                <th class="text_center">Entregue</th>
             </tr>
         </thead>
-        {% for membro in membro_list %}
+
         <tbody>
-            <tr>
-                <td>{{membro.nome}}</td>
-                <td>{{membro.cpf}}</td>
-                <td>{{membro.parentesco}}</td>
-                <td>{{membro.idade}}</td>
-                <td>{{membro.ocupacao}}</td>
-                <td>{{membro.renda}}</td>
-            </tr>
+             {% for obj in object.titulares.all %}
+             {% if obj.entregue == True %}
+
+                <tr>
+                    <td>{{obj.modified}}</td>
+                    <td>{{obj.cisterna}}</td>
+                    <td>{{obj.volume}}</td>
+                    <td>
+                        {% if obj.entregue %}
+                            <i class="fa fa-check-circle ok"></i>
+                        {% else %}
+                            <i class="fa fa-minus-circle no"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+             {% endif %}
+            {% endfor %}
         </tbody>
-        {% endfor %}
     </table>
-    {% endif %}
-    </div>
+
 
 {% endblock content %}
